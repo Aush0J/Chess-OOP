@@ -8,6 +8,7 @@ import com.chess.engine.Color;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
+import static com.chess.engine.board.Move.*;
 import com.chess.engine.board.Tile;
 import com.google.common.collect.ImmutableList;
 
@@ -35,12 +36,12 @@ public class Knight extends Piece {
                 final Tile possibleDestinationTile = board.getTile(possibleDestinationCoordinate);
 
                 if(!possibleDestinationTile.isTileOccupied()){
-                    legalMoves.add(new Move.MajorMove(board, this, possibleDestinationCoordinate));
+                    legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
                 } else {
                     final Piece pieceAtDestination = possibleDestinationTile.getPiece();
                     final Color pieceColor = pieceAtDestination.getPieceColor();
                     if(this.pieceColor != pieceColor){
-                        legalMoves.add(new Move.AttackMove(board, this, possibleDestinationCoordinate, pieceAtDestination));
+                        legalMoves.add(new AttackMove(board, this, possibleDestinationCoordinate, pieceAtDestination));
                     }
                 }
             }
