@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableList;
 public class Queen extends Piece {
     private final static int[] possibleMoveVectorCoordinates = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    Queen(final int piecePosition, final Color pieceColor) {
+    public Queen(final int piecePosition, final Color pieceColor) {
         super(piecePosition, pieceColor);
     }
 
@@ -39,7 +39,7 @@ public class Queen extends Piece {
                         legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
                     } else {
                         final Piece pieceAtDestination = possibleDestinationTile.getPiece();
-                        final Color pieceColor = pieceAtDestination.pieceColor();
+                        final Color pieceColor = pieceAtDestination.getPieceColor();
                         if(this.pieceColor != pieceColor){
                             legalMoves.add(new AttackMove(board, this, possibleDestinationCoordinate, pieceAtDestination));
                         }
@@ -51,6 +51,11 @@ public class Queen extends Piece {
         return ImmutableList.copyOf(legalMoves);
     }
 
+    @Override
+    public String toString(){
+        return Piece.PieceType.QUEEN.toString();
+    }
+    
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
         return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == -1 || candidateOffset == 7);
     }

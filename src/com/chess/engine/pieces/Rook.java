@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableList;
 public class Rook extends Piece {
     private final static int[] possibleMoveVectorCoordinates = {-8, -1, 1 ,8};
 
-    Rook(final int piecePosition, final Color pieceColor) {
+    public Rook(final int piecePosition, final Color pieceColor) {
         super(piecePosition, pieceColor);
     }
 
@@ -39,7 +39,7 @@ public class Rook extends Piece {
                         legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
                     } else {
                         final Piece pieceAtDestination = possibleDestinationTile.getPiece();
-                        final Color pieceColor = pieceAtDestination.pieceColor();
+                        final Color pieceColor = pieceAtDestination.getPieceColor();
                         if(this.pieceColor != pieceColor){
                             legalMoves.add(new AttackMove(board, this, possibleDestinationCoordinate, pieceAtDestination));
                         }
@@ -49,6 +49,11 @@ public class Rook extends Piece {
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString(){
+        return Piece.PieceType.ROOK.toString();
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){

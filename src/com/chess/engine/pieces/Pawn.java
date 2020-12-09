@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableList;
 public class Pawn extends Piece {
     private final static int[] possibleMoveCoordinates = {7, 8, 9, 16};
 
-    Pawn(final int piecePosition, final Color pieceColor) {
+    public Pawn(final int piecePosition, final Color pieceColor) {
         super(piecePosition, pieceColor);
     }
 
@@ -42,20 +42,25 @@ public class Pawn extends Piece {
             } else if(currentCoordinateOffset == 7 && !(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor) || isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor))){
                 if(board.getTile(possibleDestinationCoordinate).isTileOccupied()){
                     final Piece pieceOnCandidate = board.getTile(possibleDestinationCoordinate).getPiece();
-                    if(this.pieceColor != pieceOnCandidate.pieceColor()){
+                    if(this.pieceColor != pieceOnCandidate.getPieceColor()){
                         legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
                     }
                 }
             } else if(currentCoordinateOffset == 9 && !(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor) || isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor))){
                 if(board.getTile(possibleDestinationCoordinate).isTileOccupied()){
                     final Piece pieceOnCandidate = board.getTile(possibleDestinationCoordinate).getPiece();
-                    if(this.pieceColor != pieceOnCandidate.pieceColor()){
+                    if(this.pieceColor != pieceOnCandidate.getPieceColor()){
                         legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
                     }
                 }
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+    
+    @Override
+    public String toString(){
+        return Piece.PieceType.PAWN.toString();
     }
     
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset, final Color pieceColor) {

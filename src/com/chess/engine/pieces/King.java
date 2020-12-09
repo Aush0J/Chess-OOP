@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableList;
 public class King extends Piece {
     private final static int[] possibleMoveCoordinates = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    King(int piecePosition, Color pieceColor) {
+    public King(int piecePosition, Color pieceColor) {
         super(piecePosition, pieceColor);
     }
 
@@ -37,7 +37,7 @@ public class King extends Piece {
                     legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
                 } else {
                     final Piece pieceAtDestination = possibleDestinationTile.getPiece();
-                    final Color pieceColor = pieceAtDestination.pieceColor();
+                    final Color pieceColor = pieceAtDestination.getPieceColor();
                     if(this.pieceColor != pieceColor){
                         legalMoves.add(new AttackMove(board, this, possibleDestinationCoordinate, pieceAtDestination));
                     }
@@ -45,6 +45,11 @@ public class King extends Piece {
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString(){
+        return Piece.PieceType.KING.toString();
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
