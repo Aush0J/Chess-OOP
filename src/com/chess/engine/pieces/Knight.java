@@ -50,6 +50,11 @@ public class Knight extends Piece {
     }
 
     @Override
+    public Knight movePiece(final Move move) {
+        return new Knight(move.getDestinationCoordinate(), move.getMovedPiece().getPieceColor());
+    }
+
+    @Override
     public String toString(){
         return Piece.PieceType.KNIGHT.toString();
     }

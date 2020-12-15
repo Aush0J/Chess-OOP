@@ -39,14 +39,18 @@ public class Pawn extends Piece {
                 if(!board.getTile(behindPossibleDestinationCoordinate).isTileOccupied() && !board.getTile(possibleDestinationCoordinate).isTileOccupied()){
                     legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));    
                 }
-            } else if(currentCoordinateOffset == 7 && !(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor) || isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor))){
+            } else if(currentCoordinateOffset == 7 && 
+                      !(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor) || 
+                      isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor))){
                 if(board.getTile(possibleDestinationCoordinate).isTileOccupied()){
                     final Piece pieceOnCandidate = board.getTile(possibleDestinationCoordinate).getPiece();
                     if(this.pieceColor != pieceOnCandidate.getPieceColor()){
                         legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
                     }
                 }
-            } else if(currentCoordinateOffset == 9 && !(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor) || isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor))){
+            } else if(currentCoordinateOffset == 9 && 
+                      !(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor) || 
+                      isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset, this.pieceColor))){
                 if(board.getTile(possibleDestinationCoordinate).isTileOccupied()){
                     final Piece pieceOnCandidate = board.getTile(possibleDestinationCoordinate).getPiece();
                     if(this.pieceColor != pieceOnCandidate.getPieceColor()){
@@ -58,6 +62,11 @@ public class Pawn extends Piece {
         return ImmutableList.copyOf(legalMoves);
     }
     
+    @Override
+    public Pawn movePiece(final Move move) {
+        return new Pawn(move.getDestinationCoordinate(), move.getMovedPiece().getPieceColor());
+    }
+
     @Override
     public String toString(){
         return Piece.PieceType.PAWN.toString();

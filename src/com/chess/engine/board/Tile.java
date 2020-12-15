@@ -17,6 +17,10 @@ public abstract class Tile {
         this.tileCoordinate = tileCoordinate;
     }
     
+    public int getTileCoordinate(){
+        return this.tileCoordinate;
+    }
+
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
 

@@ -18,6 +18,7 @@ import com.chess.engine.player.BlackPlayer;
 import com.chess.engine.player.Player;
 import com.chess.engine.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 public class Board {
     private final List<Tile> gameBoard;
@@ -28,7 +29,7 @@ public class Board {
     private final BlackPlayer blackPlayer;
     private final Player currentPlayer;
 
-    private Board(Builder builder){
+    private Board(final Builder builder){
         this.gameBoard = createGameBoard(builder);
         this.whitePieces = calculateActivePieces(this.gameBoard, Color.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Color.BLACK);
@@ -38,7 +39,7 @@ public class Board {
 
         this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
-        this.currentPlayer = null;
+        this.currentPlayer = builder.nextMoveMaker.choosePlayer(this.whitePlayer, this.blackPlayer);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class Board {
         return this.whitePieces;
     }
 
-    private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
+    private Collection<Move> calculateLegalMoves(final Collection<Piece> pieces) {
         final List<Move> legalMoves = new ArrayList<>();
 
         for(final Piece piece : pieces){
@@ -107,7 +108,7 @@ public class Board {
         return gameBoard.get(tileCoordinate);
     }
 
-    public static Board createStandardBoard(){
+	public static Board createStandardBoard(){
         final Builder builder = new Builder();
 
         //Black Layout
@@ -151,6 +152,7 @@ public class Board {
     public static class Builder{
         Map<Integer, Piece> boardConfig;
         Color nextMoveMaker;
+        Pawn enPassantPawn;
 
         public Builder(){
             this.boardConfig = new HashMap<>();
@@ -169,5 +171,13 @@ public class Board {
         public Board build(){
             return new Board(this);
         }
+
+		public void setEnPassantPawn(final Pawn enPassantPawn) {
+            this.enPassantPawn = enPassantPawn;
+		}
     }
+
+	public Iterable<Move> getAllLegalMoves() {
+		return Iterables.unmodifiableIterable(Iterables.concat(this.whitePlayer.getLegalMoves(), this.blackPlayer.getLegalMoves()));
+	}
 }
