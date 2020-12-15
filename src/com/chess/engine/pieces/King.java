@@ -16,7 +16,7 @@ public class King extends Piece {
     private final static int[] possibleMoveCoordinates = {-9, -8, -7, -1, 1, 7, 8, 9};
 
     public King(int piecePosition, Color pieceColor) {
-        super(piecePosition, pieceColor);
+        super(PieceType.KING, piecePosition, pieceColor);
     }
 
     @Override

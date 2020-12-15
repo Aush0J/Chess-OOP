@@ -9,14 +9,14 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import static com.chess.engine.board.Move.*;
-import com.chess.engine.board.Tile;
+//import com.chess.engine.board.Tile;
 import com.google.common.collect.ImmutableList;
 
 public class Pawn extends Piece {
     private final static int[] possibleMoveCoordinates = {7, 8, 9, 16};
 
     public Pawn(final int piecePosition, final Color pieceColor) {
-        super(piecePosition, pieceColor);
+        super(PieceType.PAWN, piecePosition, pieceColor);
     }
 
     @Override

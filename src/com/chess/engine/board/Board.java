@@ -14,12 +14,19 @@ import com.chess.engine.pieces.Pawn;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.pieces.Queen;
 import com.chess.engine.pieces.Rook;
+import com.chess.engine.player.BlackPlayer;
+import com.chess.engine.player.Player;
+import com.chess.engine.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
 
 public class Board {
     private final List<Tile> gameBoard;
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
+
+    private final WhitePlayer whitePlayer;
+    private final BlackPlayer blackPlayer;
+    private final Player currentPlayer;
 
     private Board(Builder builder){
         this.gameBoard = createGameBoard(builder);
@@ -28,6 +35,10 @@ public class Board {
 
         final Collection<Move> whiteStandardLegalMoves = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackStandardLegalMoves = calculateLegalMoves(this.blackPieces);
+
+        this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+        this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+        this.currentPlayer = null;
     }
 
     @Override
@@ -44,13 +55,29 @@ public class Board {
         return builder.toString();
     }
 
+    public Player whitePlayer(){
+        return this.whitePlayer;
+    }
+    public Player blackPlayer(){
+        return this.blackPlayer;
+    }    
+    public Player currentPlayer(){
+        return this.currentPlayer;
+    }
+
+    public Collection<Piece> getBlackPieces(){
+        return this.blackPieces;
+    }
+    public Collection<Piece> getWhitePieces(){
+        return this.whitePieces;
+    }
+
     private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
         final List<Move> legalMoves = new ArrayList<>();
 
         for(final Piece piece : pieces){
             legalMoves.addAll(piece.calculateLegalMoves(this));
         }
-
         return ImmutableList.copyOf(legalMoves);
     }
 
@@ -65,7 +92,6 @@ public class Board {
                 }
             }
         }
-
         return ImmutableList.copyOf(activePieces);
     }
 
