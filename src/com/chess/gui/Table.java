@@ -3,13 +3,18 @@ package com.chess.gui;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+public class Table {
 
     private final JFrame gameFrame;
     private final BoardPanel boardPanel;
@@ -95,7 +100,7 @@ import java.util.List;
                 String pieceIconPath = "";
              try{
                 final BufferedImage image = 
-                        ImageIO.read(new File(pieceIconPath + board.getTile(this.tileId).getPiece().getPieceAlliance().toString().substring(0,1) +
+                        ImageIO.read(new File(pieceIconPath + board.getTile(this.tileId).getPiece().getPieceColor().toString().substring(0,1) +
                         board.getTile(this.tileId).getPiece().toString() + ".gif"));
                 add(new JLabel(new ImageIcon(image)));
                 } catch (IOException e) {
@@ -105,17 +110,17 @@ import java.util.List;
         }       
 
         private void assignTileColor(){
-            if (BoardUtils.FIRST_ROW[this.tileId] ||
-                    BoardUtils.THIRD_ROW[this.tileId] ||
-                    BoardUtils.FIFTH_ROW[this.tileId] ||
-                    BoardUtils.SEVENTH_ROW[this.tileId]) {
+            if (BoardUtils.EIGHTH_RANK[this.tileId] ||
+                BoardUtils.SIXTH_RANK[this.tileId] ||
+                BoardUtils.FOURTH_RANK[this.tileId] ||
+                BoardUtils.SECOND_RANK[this.tileId]) {
                         setBackground(this.tileId % 2 == 0 ? lightTileColor : darkTileColor);
-                } else if(BoardUtils.SECOND_ROW[this.tileId] ||
-                    BoardUtils.FOURTH_ROW[this.tileId] ||
-                    BoardUtils.SIXTH_ROW[this.tileId] ||
-                    BoardUtils.EIGHTH_ROW[this.tileId]) {
-                        setBackground(this.tileId % 2 != 0 ? lightTileColor : darkTileColor);
-                    }
+            } else if(BoardUtils.SEVENTH_RANK[this.tileId] ||
+                BoardUtils.FIFTH_RANK[this.tileId] ||
+                BoardUtils.THIRD_RANK[this.tileId] ||
+                BoardUtils.FIRST_RANK[this.tileId]) {
+                    setBackground(this.tileId % 2 != 0 ? lightTileColor : darkTileColor);
+            }
         }
     }
 }
