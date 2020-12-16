@@ -2,13 +2,8 @@ package com.chess.gui;
 
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
-<<<<<<< Updated upstream
-
-import javax.imageio.ImageIO;
-=======
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
->>>>>>> Stashed changes
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,11 +15,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-<<<<<<< Updated upstream
-public class Table {
-=======
 public class Table{
->>>>>>> Stashed changes
 
     private final JFrame gameFrame;
     private final BoardPanel boardPanel;
@@ -112,13 +103,7 @@ public class Table{
             this.removeAll();
             if(board.getTile(this.tileId).isTileOccupied()) {
              try{
-<<<<<<< Updated upstream
-                final BufferedImage image = 
-                        ImageIO.read(new File(pieceIconPath + board.getTile(this.tileId).getPiece().getPieceColor().toString().substring(0,1) +
-                        board.getTile(this.tileId).getPiece().toString() + ".gif"));
-=======
                 final BufferedImage image = ImageIO.read(new File(defaultPieceImagesPath + board.getTile(this.tileId).getPiece().getPieceColor().toString().substring(0,1) + board.getTile(this.tileId).getPiece().toString() + ".png"));
->>>>>>> Stashed changes
                 add(new JLabel(new ImageIcon(image)));
                 } catch (IOException e) {
                 e.printStackTrace();
