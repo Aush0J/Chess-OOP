@@ -47,5 +47,5 @@ public enum Color {
     public abstract int getDirection();
     public abstract boolean isWhite();
     public abstract boolean isBlack();
-    public abstract Player choosePlayer(WhitePlayer whitePlayer, BlackPlayer blackPlayer);
+    public abstract Player choosePlayer(final WhitePlayer whitePlayer, final BlackPlayer blackPlayer);
 }

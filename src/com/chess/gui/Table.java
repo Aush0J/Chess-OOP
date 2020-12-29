@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.*;
 import java.util.List;
 
 public class Table {
@@ -193,7 +192,7 @@ public class Table {
             return this.moves.size();
         }
         public void clear(){
-            return this.moves.clear();
+            this.moves.clear();
         }
         public Move removeMove(int index){
             return this.moves.remove(index);
@@ -245,7 +244,7 @@ public class Table {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                gameHistoryPanel.redo(chessBoard, MoveLog);
+                                gameHistoryPanel.redo(chessBoard, moveLog);
                                 takenPiecesPanel.redo(moveLog);
                                 boardPanel.drawBoard(chessBoard);
                             }
@@ -256,26 +255,22 @@ public class Table {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    // TODO Auto-generated method stub
 
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    // TODO Auto-generated method stub
 
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    // TODO Auto-generated method stub
 
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    // TODO Auto-generated method stub
-
+                    
                 }
             });
             validate();

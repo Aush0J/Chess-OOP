@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MainChess",
+            "request": "launch",
+            "mainClass": "com.chess.MainChess",
+            "projectName": "Chess-OOP_d7c42e4f"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"

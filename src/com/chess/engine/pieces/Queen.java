@@ -16,7 +16,10 @@ public class Queen extends Piece {
     private final static int[] possibleMoveVectorCoordinates = {-9, -8, -7, -1, 1, 7, 8, 9};
 
     public Queen(final int piecePosition, final Color pieceColor) {
-        super(PieceType.QUEEN, piecePosition, pieceColor);
+        super(PieceType.QUEEN, piecePosition, pieceColor, true);
+    }
+    public Queen(final int piecePosition, final Color pieceColor, final boolean isFirstMove) {
+        super(PieceType.QUEEN, piecePosition, pieceColor, isFirstMove);
     }
 
     @Override

@@ -16,7 +16,10 @@ public class King extends Piece {
     private final static int[] possibleMoveCoordinates = {-9, -8, -7, -1, 1, 7, 8, 9};
 
     public King(final int piecePosition, final Color pieceColor) {
-        super(PieceType.KING, piecePosition, pieceColor);
+        super(PieceType.KING, piecePosition, pieceColor, true);
+    }
+    public King(final int piecePosition, final Color pieceColor, final boolean isFirstMove) {
+        super(PieceType.KING, piecePosition, pieceColor, isFirstMove);
     }
 
     @Override
