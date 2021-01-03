@@ -1,73 +1,83 @@
 package com.chess.engine.pieces;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import com.chess.engine.Color;
+import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
-import static com.chess.engine.board.Move.*;
-import com.chess.engine.board.Tile;
-import com.google.common.collect.ImmutableList;
+import com.chess.engine.board.Move.MajorAttackMove;
+import com.chess.engine.board.Move.MajorMove;
 
-public class Queen extends Piece {
-    private final static int[] possibleMoveVectorCoordinates = {-9, -8, -7, -1, 1, 7, 8, 9};
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
-    public Queen(final int piecePosition, final Color pieceColor) {
-        super(PieceType.QUEEN, piecePosition, pieceColor, true);
+public final class Queen extends Piece {
+
+    private final static int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1,
+        7, 8, 9 };
+
+    public Queen(final Alliance alliance, final int piecePosition) {
+        super(PieceType.QUEEN, alliance, piecePosition, true);
     }
-    public Queen(final int piecePosition, final Color pieceColor, final boolean isFirstMove) {
-        super(PieceType.QUEEN, piecePosition, pieceColor, isFirstMove);
+
+    public Queen(final Alliance alliance,
+                 final int piecePosition,
+                 final boolean isFirstMove) {
+        super(PieceType.QUEEN, alliance, piecePosition, isFirstMove);
     }
 
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
-
-        for(final int currentCoordinateOffset: possibleMoveVectorCoordinates){
-            int possibleDestinationCoordinate = this.piecePosition;
-
-            while (BoardUtils.isValidTileCoordinate(possibleDestinationCoordinate)) {
-                if(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset) || 
-                   isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset)){
+        for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
+            int candidateDestinationCoordinate = this.piecePosition;
+            while (true) {
+                if (isFirstColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate) ||
+                    isEightColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate)) {
                     break;
                 }
-                possibleDestinationCoordinate += currentCoordinateOffset;
-                if(BoardUtils.isValidTileCoordinate(possibleDestinationCoordinate)){
-                    final Tile possibleDestinationTile = board.getTile(possibleDestinationCoordinate);
-
-                    if(!possibleDestinationTile.isTileOccupied()){
-                        legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
+                candidateDestinationCoordinate += currentCandidateOffset;
+                if (!BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
+                    break;
+                } else {
+                    final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
+                    if (pieceAtDestination == null) {
+                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                     } else {
-                        final Piece pieceAtDestination = possibleDestinationTile.getPiece();
-                        final Color pieceColor = pieceAtDestination.getPieceColor();
-                        if(this.pieceColor != pieceColor){
-                            legalMoves.add(new MajorAttackMove(board, this, possibleDestinationCoordinate, pieceAtDestination));
+                        final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
+                        if (this.pieceAlliance != pieceAtDestinationAllegiance) {
+                            legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate,
+                                    pieceAtDestination));
                         }
                         break;
                     }
                 }
             }
         }
-        return ImmutableList.copyOf(legalMoves);
+        return Collections.unmodifiableList(legalMoves);
     }
 
     @Override
     public Queen movePiece(final Move move) {
-        return new Queen(move.getDestinationCoordinate(), move.getMovedPiece().getPieceColor());
+        return PieceUtils.INSTANCE.getMovedQueen(move.getMovedPiece().getPieceAllegiance(), move.getDestinationCoordinate());
     }
 
     @Override
-    public String toString(){
-        return Piece.PieceType.QUEEN.toString();
+    public String toString() {
+        return this.pieceType.toString();
     }
-    
-    private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == -1 || candidateOffset == 7);
+
+    private static boolean isFirstColumnExclusion(final int currentPosition,
+                                                  final int candidatePosition) {
+        return BoardUtils.INSTANCE.FIRST_COLUMN.get(candidatePosition) && ((currentPosition == -9)
+                || (currentPosition == -1) || (currentPosition == 7));
     }
-    private static boolean isEighthColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 1 || candidateOffset == 9);
+
+    private static boolean isEightColumnExclusion(final int currentPosition,
+                                                  final int candidatePosition) {
+        return BoardUtils.INSTANCE.EIGHTH_COLUMN.get(candidatePosition) && ((currentPosition == -7)
+                || (currentPosition == 1) || (currentPosition == 9));
     }
+
 }

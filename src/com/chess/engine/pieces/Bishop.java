@@ -1,73 +1,82 @@
 package com.chess.engine.pieces;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import com.chess.engine.Color;
+import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
-import static com.chess.engine.board.Move.*;
-import com.chess.engine.board.Tile;
-import com.google.common.collect.ImmutableList;
+import com.chess.engine.board.Move.MajorAttackMove;
+import com.chess.engine.board.Move.MajorMove;
 
-public class Bishop extends Piece {
-    private final static int[] possibleMoveVectorCoordinates = {-9, -7, 7 ,9};
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
-    public Bishop(final int piecePosition, final Color pieceColor) {
-        super(PieceType.BISHOP, piecePosition, pieceColor, true);
+public final class Bishop extends Piece {
+
+    private final static int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
+
+    public Bishop(final Alliance alliance,
+                  final int piecePosition) {
+         super(PieceType.BISHOP, alliance, piecePosition, true);
     }
-    public Bishop(final int piecePosition, final Color pieceColor, final boolean isFirstMove) {
-        super(PieceType.BISHOP, piecePosition, pieceColor, isFirstMove);
+
+    public Bishop(final Alliance alliance,
+                  final int piecePosition,
+                   final boolean isFirstMove) {
+        super(PieceType.BISHOP, alliance, piecePosition, isFirstMove);
     }
 
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
-
-        for(final int currentCoordinateOffset: possibleMoveVectorCoordinates){
-            int possibleDestinationCoordinate = this.piecePosition;
-
-            while (BoardUtils.isValidTileCoordinate(possibleDestinationCoordinate)) {
-                if(isFirstColumnExclusion(this.piecePosition, currentCoordinateOffset) || 
-                   isEighthColumnExclusion(this.piecePosition, currentCoordinateOffset)){
+        for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
+            int candidateDestinationCoordinate = this.piecePosition;
+            while (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
+                if (isFirstColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate) ||
+                    isEighthColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate)) {
                     break;
                 }
-                possibleDestinationCoordinate += currentCoordinateOffset;
-                if(BoardUtils.isValidTileCoordinate(possibleDestinationCoordinate)){
-                    final Tile possibleDestinationTile = board.getTile(possibleDestinationCoordinate);
-
-                    if(!possibleDestinationTile.isTileOccupied()){
-                        legalMoves.add(new MajorMove(board, this, possibleDestinationCoordinate));
-                    } else {
-                        final Piece pieceAtDestination = possibleDestinationTile.getPiece();
-                        final Color pieceColor = pieceAtDestination.getPieceColor();
-                        if(this.pieceColor != pieceColor){
-                            legalMoves.add(new MajorAttackMove(board, this, possibleDestinationCoordinate, pieceAtDestination));
+                candidateDestinationCoordinate += currentCandidateOffset;
+                if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
+                    final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
+                    if (pieceAtDestination == null) {
+                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                    }
+                    else {
+                        final Alliance pieceAlliance = pieceAtDestination.getPieceAllegiance();
+                        if (this.pieceAlliance != pieceAlliance) {
+                            legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate,
+                                    pieceAtDestination));
                         }
                         break;
                     }
                 }
             }
         }
-        return ImmutableList.copyOf(legalMoves);
+        return Collections.unmodifiableList(legalMoves);
     }
 
     @Override
     public Bishop movePiece(final Move move) {
-        return new Bishop(move.getDestinationCoordinate(), move.getMovedPiece().getPieceColor());
+        return PieceUtils.INSTANCE.getMovedBishop(move.getMovedPiece().getPieceAllegiance(), move.getDestinationCoordinate());
     }
 
     @Override
-    public String toString(){
-        return Piece.PieceType.BISHOP.toString();
+    public String toString() {
+        return this.pieceType.toString();
     }
 
-    private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == 7);
+    private static boolean isFirstColumnExclusion(final int currentCandidate,
+                                                  final int candidateDestinationCoordinate) {
+        return (BoardUtils.INSTANCE.FIRST_COLUMN.get(candidateDestinationCoordinate) &&
+                ((currentCandidate == -9) || (currentCandidate == 7)));
     }
-    private static boolean isEighthColumnExclusion(final int currentPosition, final int candidateOffset){
-        return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 9);
-    }    
+
+    private static boolean isEighthColumnExclusion(final int currentCandidate,
+                                                   final int candidateDestinationCoordinate) {
+        return BoardUtils.INSTANCE.EIGHTH_COLUMN.get(candidateDestinationCoordinate) &&
+                        ((currentCandidate == -7) || (currentCandidate == 9));
+    }
+
 }
