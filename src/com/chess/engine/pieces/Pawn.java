@@ -34,7 +34,11 @@ public class Pawn extends Piece {
             }
 
             if(currentCoordinateOffset == 8 && !board.getTile(possibleDestinationCoordinate).isTileOccupied()){
-                legalMoves.add(new PawnMove(board, this, possibleDestinationCoordinate));
+                if(this.pieceColor.isPawnPromotionSquare(possibleDestinationCoordinate)){
+                    legalMoves.add(new PawnPromotion(new PawnMove(board, this, possibleDestinationCoordinate)));
+                } else {
+                    legalMoves.add(new PawnMove(board, this, possibleDestinationCoordinate));
+                }
             } else if(currentCoordinateOffset == 16 && this.isFirstMove() && 
                      (BoardUtils.SEVENTH_RANK[this.piecePosition] && this.pieceColor.isBlack()) || 
                      (BoardUtils.SECOND_RANK[this.piecePosition] && this.pieceColor.isWhite())){
@@ -48,7 +52,11 @@ public class Pawn extends Piece {
                 if(board.getTile(possibleDestinationCoordinate).isTileOccupied()){
                     final Piece pieceOnCandidate = board.getTile(possibleDestinationCoordinate).getPiece();
                     if(this.pieceColor != pieceOnCandidate.getPieceColor()){
-                        legalMoves.add(new PawnAttackMove(board, this, possibleDestinationCoordinate, pieceOnCandidate));
+                        if(this.pieceColor.isPawnPromotionSquare(possibleDestinationCoordinate)){
+                            legalMoves.add(new PawnPromotion(new PawnAttackMove(board, this, possibleDestinationCoordinate, pieceOnCandidate)));
+                        } else {
+                            legalMoves.add(new PawnAttackMove(board, this, possibleDestinationCoordinate, pieceOnCandidate));
+                        }
                     }
                 } else if(board.getEnPassantPawn() != null){
                     if(board.getEnPassantPawn().getPiecePosition() == (this.piecePosition + (this.pieceColor.getOppositeDirection()))){
@@ -64,7 +72,11 @@ public class Pawn extends Piece {
                 if(board.getTile(possibleDestinationCoordinate).isTileOccupied()){
                     final Piece pieceOnCandidate = board.getTile(possibleDestinationCoordinate).getPiece();
                     if(this.pieceColor != pieceOnCandidate.getPieceColor()){
-                        legalMoves.add(new PawnAttackMove(board, this, possibleDestinationCoordinate, pieceOnCandidate));
+                        if(this.pieceColor.isPawnPromotionSquare(possibleDestinationCoordinate)){
+                            legalMoves.add(new PawnPromotion(new PawnAttackMove(board, this, possibleDestinationCoordinate, pieceOnCandidate)));
+                        } else {
+                            legalMoves.add(new PawnAttackMove(board, this, possibleDestinationCoordinate, pieceOnCandidate));
+                        }
                     }
                 } else if(board.getEnPassantPawn() != null){
                     if(board.getEnPassantPawn().getPiecePosition() == (this.piecePosition - (this.pieceColor.getOppositeDirection()))){
@@ -89,6 +101,10 @@ public class Pawn extends Piece {
         return Piece.PieceType.PAWN.toString();
     }
     
+    public Piece getPromotionPiece(){
+        return new Queen(this.piecePosition, this.pieceColor, false);
+    }
+
     private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset, final Color pieceColor) {
         return (candidateOffset == 7 && (BoardUtils.FIRST_COLUMN[currentPosition] && pieceColor.isBlack())) ||
                (candidateOffset == 9 && (BoardUtils.FIRST_COLUMN[currentPosition] && pieceColor.isWhite()));
