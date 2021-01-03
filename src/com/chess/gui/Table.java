@@ -32,7 +32,6 @@ public final class Table extends Observable {
     private Piece humanMovedPiece;
     private BoardDirection boardDirection;
     private String pieceIconPath;
-    private boolean highlightLegalMoves;
     private Color lightTileColor = Color.decode("#FFFACD");
     private Color darkTileColor = Color.decode("#593E1A");
 
@@ -50,7 +49,6 @@ public final class Table extends Observable {
         this.gameFrame.setLayout(new BorderLayout());
         this.chessBoard = Board.createStandardBoard();
         this.boardDirection = BoardDirection.NORMAL;
-        this.highlightLegalMoves = false;
         this.pieceIconPath = "art/pieces/";
         this.gameHistoryPanel = new GameHistoryPanel();
         this.takenPiecesPanel = new TakenPiecesPanel();
@@ -93,10 +91,6 @@ public final class Table extends Observable {
 
     private TakenPiecesPanel getTakenPiecesPanel() {
         return this.takenPiecesPanel;
-    }
-
-    private boolean getHighlightLegalMoves() {
-        return this.highlightLegalMoves;
     }
 
     public void show() {
@@ -228,11 +222,6 @@ public final class Table extends Observable {
 
         }
 
-    }
-
-    enum PlayerType {
-        HUMAN,
-        COMPUTER
     }
 
     private class BoardPanel extends JPanel {
