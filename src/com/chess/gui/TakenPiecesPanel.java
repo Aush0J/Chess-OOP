@@ -12,18 +12,22 @@ import com.google.common.primitives.Ints;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import javax.swing.*;
+//import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
-import static com.chess.gui.Table.*;
+//import static com.chess.gui.Table.*;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.List;
 
 public class TakenPiecesPanel extends JPanel {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1204259813888497835L;
     private final JPanel northPanel;
     private final JPanel southPanel;
 
@@ -82,8 +86,9 @@ public class TakenPiecesPanel extends JPanel {
         for(final Piece takenPiece : whiteTakenPieces){
             try{
                 final BufferedImage image = ImageIO.read(new File("art/pieces" + takenPiece.getPieceColor().toString().substring(0,1) + "" + takenPiece.toString()));
-                final ImageIcon icon = new ImageIcon(image);
-                final JLabel imageLabel = new JLabel();
+                final ImageIcon ic = new ImageIcon(image);
+                final JLabel imageLabel = new JLabel(new ImageIcon(ic.getImage().getScaledInstance(
+                        ic.getIconWidth() - 15, ic.getIconWidth() - 15, Image.SCALE_SMOOTH)));
                 this.southPanel.add(imageLabel);
             }catch(final IOException e){
                 e.printStackTrace();
@@ -93,8 +98,9 @@ public class TakenPiecesPanel extends JPanel {
         for(final Piece takenPiece : blackTakenPieces){
             try{
                 final BufferedImage image = ImageIO.read(new File("art/pieces" + takenPiece.getPieceColor().toString().substring(0,1) + "" + takenPiece.toString()));
-                final ImageIcon icon = new ImageIcon(image);
-                final JLabel imageLabel = new JLabel();
+                final ImageIcon ic = new ImageIcon(image);
+                final JLabel imageLabel = new JLabel(new ImageIcon(ic.getImage().getScaledInstance(
+                    ic.getIconWidth() - 15, ic.getIconWidth() - 15, Image.SCALE_SMOOTH)));
                 this.northPanel.add(imageLabel);
             }catch(final IOException e){
                 e.printStackTrace();

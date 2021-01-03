@@ -153,6 +153,10 @@ public class Table {
 
     }
     private class BoardPanel extends JPanel {
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1025780012355269013L;
         private final List<TilePanel> boardTiles;
 
         BoardPanel(){
@@ -203,6 +207,7 @@ public class Table {
     }
 
     private class TilePanel extends JPanel{
+      
         private final int tileId;
 
         TilePanel(final BoardPanel boardPanel, 
@@ -279,8 +284,20 @@ public class Table {
         public void drawTile(final Board board){
         assignTileColor();
         assignTilePieceIcon(board);
+        highlightLegals(board);
+        highlightTileBorder(board);
         validate();
         repaint();
+        }
+
+        private void highlightTileBorder(final Board board) {
+            if(humanMovedPiece != null &&
+               humanMovedPiece.getPieceColor() == board.currentPlayer().getColor() &&
+               humanMovedPiece.getPiecePosition() == this.tileId) {
+                setBorder(BorderFactory.createLineBorder(Color.cyan));
+            } else {
+                setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            }
         }
 
         private void assignTilePieceIcon(final Board board) {
@@ -297,7 +314,7 @@ public class Table {
             }
         }
         
-        private void highLightLegals(final Board board) {
+        private void highlightLegals(final Board board) {
             if(highLightLegalMoves) {
                 for(final Move move : pieceLegalMoves(board)) {
                     if(move.getDestinationCoordinate() == this.tileId) {

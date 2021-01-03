@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class GameHistoryPanel extends JPanel {
-    
-    private final DataModel model;
+  
+	private final DataModel model;
     private final JScrollPane scrollPane;
     private static final Dimension HISTORY_PANEL_DIMENSION = new Dimension(100,400);
 
@@ -90,7 +90,11 @@ class GameHistoryPanel extends JPanel {
                 }
 
         private static class DataModel extends DefaultTableModel {
-        private final List<Row> values;
+            /**
+             *
+             */
+            private static final long serialVersionUID = -3231984252730057299L;
+            private final List<Row> values;
         private static final String[] NAMES = {"White", "Black"};
 
         DataModel(){

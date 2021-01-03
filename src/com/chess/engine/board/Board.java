@@ -153,6 +153,8 @@ public class Board {
         builder.setPiece(new Knight(62, Color.WHITE));
         builder.setPiece(new Rook(63, Color.WHITE));
         
+        builder.setMoverMaker(Color.WHITE);
+
         return builder.build();
     }
 
