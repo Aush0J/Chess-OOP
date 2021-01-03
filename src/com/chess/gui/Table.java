@@ -54,7 +54,7 @@ public final class Table extends Observable {
         this.takenPiecesPanel = new TakenPiecesPanel();
         this.boardPanel = new BoardPanel();
         this.moveLog = new MoveLog();
-        this.addObserver(new TableGameAIWatcher());
+        this.addObserver(new TableGameWatcher());
         this.gameFrame.add(this.takenPiecesPanel, BorderLayout.WEST);
         this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
         this.gameFrame.add(this.gameHistoryPanel, BorderLayout.EAST);
@@ -201,7 +201,7 @@ public final class Table extends Observable {
         Table.get().getBoardPanel().drawBoard(chessBoard);
     }
 
-    private static class TableGameAIWatcher
+    private static class TableGameWatcher
             implements Observer {
 
         @Override
