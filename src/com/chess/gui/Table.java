@@ -8,7 +8,6 @@ import com.google.common.collect.Lists;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-//import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -181,6 +180,8 @@ public final class Table extends Observable {
                 "\nisCastled = " +player.isCastled())+ "\n";
     }
 
+    
+
     private void undoAllMoves() {
         for(int i = Table.get().getMoveLog().size() - 1; i >= 0; i--) {
             final Move lastMove = Table.get().getMoveLog().removeMove(Table.get().getMoveLog().size() - 1);
@@ -199,6 +200,11 @@ public final class Table extends Observable {
         Table.get().getGameHistoryPanel().redo(chessBoard, Table.get().getMoveLog());
         Table.get().getTakenPiecesPanel().redo(Table.get().getMoveLog());
         Table.get().getBoardPanel().drawBoard(chessBoard);
+    }
+
+    private void moveMadeUpdate(final PlayerType playerType) {
+        setChanged();
+        notifyObservers(playerType);
     }
 
     private static class TableGameWatcher
@@ -222,6 +228,10 @@ public final class Table extends Observable {
 
         }
 
+    }
+
+    enum PlayerType {
+        HUMAN
     }
 
     private class BoardPanel extends JPanel {
@@ -251,9 +261,6 @@ public final class Table extends Observable {
             validate();
             repaint();
         }
-
-       
-
     }
 
     enum BoardDirection {
@@ -360,6 +367,9 @@ public final class Table extends Observable {
                     invokeLater(() -> {
                         gameHistoryPanel.redo(chessBoard, moveLog);
                         takenPiecesPanel.redo(moveLog);
+                        
+                            Table.get().moveMadeUpdate(PlayerType.HUMAN);
+                        
                         boardPanel.drawBoard(chessBoard);
                     });
                 }
