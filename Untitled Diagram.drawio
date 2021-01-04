@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2021-01-04T08:03:33.874Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="8KQx7aBH0DQMVM6odO9B" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-04T08:25:34.943Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="UWSf5wmavUbv2ZjiZBjS" version="14.1.8" type="github">
   <diagram id="-DoxXB5ioh9CImpn-rvL" name="Page-1">
-    <mxGraphModel dx="2681" dy="2726" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3731" dy="3289" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="LNlhiUmVujPS2ecl1WR9-110" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=150;tabHeight=50;tabPosition=left;html=1;" parent="1" vertex="1">
-          <mxGeometry x="1430" y="-2120" width="2420" height="1390" as="geometry" />
+        <mxCell id="LNlhiUmVujPS2ecl1WR9-110" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=150;tabHeight=40;tabPosition=left;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1430" y="-2110" width="2420" height="1380" as="geometry" />
         </mxCell>
         <mxCell id="LNlhiUmVujPS2ecl1WR9-5" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=160;tabHeight=40;tabPosition=left;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1610" y="-2110" width="3000" height="1380" as="geometry" />
@@ -384,7 +384,7 @@
           <mxGeometry x="-1570" y="-2110" width="85" height="40" as="geometry" />
         </mxCell>
         <mxCell id="LNlhiUmVujPS2ecl1WR9-111" value="&lt;b&gt;pieces&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="1470" y="-2120" width="80" height="50" as="geometry" />
+          <mxGeometry x="1470" y="-2110" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="LNlhiUmVujPS2ecl1WR9-112" value="&lt;&lt;abstract&gt;&gt;&#xa;Piece" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2515" y="-1725" width="460" height="310" as="geometry" />
@@ -550,6 +550,54 @@
               <mxPoint x="3090" y="-1935" />
               <mxPoint x="3090" y="-1645" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-1" value="d" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=150;tabHeight=40;tabPosition=left;html=1;" vertex="1" parent="1">
+          <mxGeometry x="3900" y="-2110" width="1500" height="1380" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-2" value="&lt;b&gt;player&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="3940" y="-2110" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-3" value="&lt;&lt;abstract&gt;&gt;&#xa;Player" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="4330" y="-1610" width="690" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-4" value="+ board: Board&#xa;+ playerKing: King&#xa;+ legalMoves: Collection&lt;Move&gt;&#xa;+ isInCheck: boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="R5cSlF86ASt4ZV3UKbgb-3">
+          <mxGeometry y="40" width="690" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-5" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="R5cSlF86ASt4ZV3UKbgb-3">
+          <mxGeometry y="110" width="690" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-6" value="&lt;&lt;constructor&gt;&gt;&#xa;+ Player(board: Board, playerLegals: Collection&lt;Move&gt;, opponentLegals: Collection&lt;Move&gt;)&#xa;&lt;&lt;process&gt;&gt;&#xa;+ isInCheck(): boolean&#xa;+ isInCheckMate(): boolean&#xa;+ isInStaleMate(): boolean&#xa;+ isCastled(): boolean&#xa;+ isKingSideCastleCapable(): boolean&#xa;+ isQueenSideCastleCapable(): boolean&#xa;+ getPlayerKing(): King&#xa;+ establishKing(): King&#xa;+ hasEscapeMoves(): boolean&#xa;+ getLegalMoves(): Collection&lt;Move&gt;&#xa;+ calculateAttacksOnTile(): Collection&lt;Move&gt;&#xa;+ makeMove(move: Move): MoveTransition&#xa;+ unMakeMove(move: Move): MoveTransition&#xa;+ hasCastleOpportunities(): boolean&#xa;+ getActivePieces(): Collection&lt;Piece&gt; &lt;&lt;abstract&gt;&gt;&#xa;+ getAlliance(): Alliance &lt;&lt;abstract&gt;&gt;&#xa;+ getOpponent(): Player &lt;&lt;abstract&gt;&gt;&#xa;+ calculateKingCastles(playerLegals: Collection&lt;Move&gt;, opponentLegals: Collection&lt;Move&gt;): Collection&lt;Move&gt; &lt;&lt;abstract&gt;&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="R5cSlF86ASt4ZV3UKbgb-3">
+          <mxGeometry y="118" width="690" height="312" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-7" value="BlackPlayer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="4330" y="-1920" width="690" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-9" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="R5cSlF86ASt4ZV3UKbgb-7">
+          <mxGeometry y="26" width="690" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-10" value="&lt;&lt;constructor&gt;&gt;&#xa;+ BlackPlayer(board: Board, whiteStandardLegals: Collection&lt;Move&gt;, blackStandardLegals: Collection&lt;Move&gt;)&#xa;&lt;&lt;process&gt;&gt;&#xa;+ calculateKingCastles(playerLegals: Collection&lt;Move&gt;, opponentLegals: Collection&lt;Move&gt;): Collection&lt;Move&gt; &lt;&lt;override&gt;&gt;&#xa;+ getActivePieces(): Collection&lt;Piece&gt; &lt;&lt;override&gt;&gt;&#xa;+ getAlliance(): Alliance &lt;&lt;override&gt;&gt;&#xa;+ getOpponent(): Player &lt;&lt;override&gt;&gt;&#xa;+ toString(): String &lt;&lt;override&gt;&gt;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="R5cSlF86ASt4ZV3UKbgb-7">
+          <mxGeometry y="34" width="690" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-11" value="WhitePlayer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="4330" y="-1020" width="690" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="R5cSlF86ASt4ZV3UKbgb-11">
+          <mxGeometry y="26" width="690" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-13" value="&lt;&lt;constructor&gt;&gt;&#xa;+ WhitePlayer(board: Board, whiteStandardLegals: Collection&lt;Move&gt;, blackStandardLegals: Collection&lt;Move&gt;)&#xa;&lt;&lt;process&gt;&gt;&#xa;+ calculateKingCastles(playerLegals: Collection&lt;Move&gt;, opponentLegals: Collection&lt;Move&gt;): Collection&lt;Move&gt; &lt;&lt;override&gt;&gt;&#xa;+ getActivePieces(): Collection&lt;Piece&gt; &lt;&lt;override&gt;&gt;&#xa;+ getAlliance(): Alliance &lt;&lt;override&gt;&gt;&#xa;+ getOpponent(): Player &lt;&lt;override&gt;&gt;&#xa;+ toString(): String &lt;&lt;override&gt;&gt;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="R5cSlF86ASt4ZV3UKbgb-11">
+          <mxGeometry y="34" width="690" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-14" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;" edge="1" parent="1" source="R5cSlF86ASt4ZV3UKbgb-7" target="R5cSlF86ASt4ZV3UKbgb-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="4920" y="-1390" as="sourcePoint" />
+            <mxPoint x="5080" y="-1390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R5cSlF86ASt4ZV3UKbgb-15" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;" edge="1" parent="1" source="R5cSlF86ASt4ZV3UKbgb-11" target="R5cSlF86ASt4ZV3UKbgb-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="4920" y="-1390" as="sourcePoint" />
+            <mxPoint x="5080" y="-1390" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
