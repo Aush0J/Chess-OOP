@@ -149,7 +149,7 @@ public abstract class Move {
         }
 
         @Override
-        public int hashCode() {
+        public int hashCode() { 
             return decoratedMove.hashCode() + (31 * promotedPawn.hashCode());
         }
 

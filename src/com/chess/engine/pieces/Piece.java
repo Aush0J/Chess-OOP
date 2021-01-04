@@ -41,10 +41,6 @@ public abstract class Piece {
         return this.isFirstMove;
     }
 
-    public int getPieceValue() {
-        return this.pieceType.getPieceValue();
-    }
-
     public abstract Piece movePiece(Move move);
 
     public abstract Collection<Move> calculateLegalMoves(final Board board);
@@ -78,28 +74,22 @@ public abstract class Piece {
 
     public enum PieceType {
 
-        PAWN(100, "P"),
-        KNIGHT(300, "H"),
-        BISHOP(330, "B"),
-        ROOK(500, "R"),
-        QUEEN(900, "Q"),
-        KING(10000, "K");
+        PAWN("P"),
+        KNIGHT("H"),
+        BISHOP("B"),
+        ROOK("R"),
+        QUEEN("Q"),
+        KING("K");
 
-        private final int value;
+       
         private final String pieceName;
-
-        public int getPieceValue() {
-            return this.value;
-        }
 
         @Override
         public String toString() {
             return this.pieceName;
         }
 
-        PieceType(final int val,
-                  final String pieceName) {
-            this.value = val;
+        PieceType(final String pieceName) {
             this.pieceName = pieceName;
         }
 

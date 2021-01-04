@@ -9,8 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -21,7 +19,6 @@ import javax.swing.border.EtchedBorder;
 import com.chess.engine.board.Move;
 import com.chess.engine.pieces.Piece;
 import com.chess.gui.Table.MoveLog;
-import com.google.common.primitives.Ints;
 
 class TakenPiecesPanel extends JPanel {
 
@@ -66,20 +63,7 @@ class TakenPiecesPanel extends JPanel {
             }
         }
 
-        Collections.sort(whiteTakenPieces, new Comparator<Piece>() {
-            @Override
-            public int compare(final Piece p1, final Piece p2) {
-                return Ints.compare(p1.getPieceValue(), p2.getPieceValue());
-            }
-        });
-
-        Collections.sort(blackTakenPieces, new Comparator<Piece>() {
-            @Override
-            public int compare(final Piece p1, final Piece p2) {
-                return Ints.compare(p1.getPieceValue(), p2.getPieceValue());
-            }
-        });
-        
+      
         for (final Piece takenPiece : whiteTakenPieces) {
             try {
                 final BufferedImage image = ImageIO.read(new File("art/pieces/"
